@@ -15,8 +15,8 @@ RUN npm install -g pm2 \
 
 # setup default site
 RUN rm -f /etc/ssh/sshd_config
-COPY startup /opt/startup
-COPY hostingstart.html /opt/startup
+COPY startup /home/site/wwwroot
+COPY hostingstart.html /home/site/wwwroot
 
 # configure startup
 RUN mkdir -p /tmp
@@ -27,7 +27,7 @@ RUN chmod -R +x /opt/startup \
    && chmod -R +x /tmp/ssh_setup.sh \
    && (sleep 1;/tmp/ssh_setup.sh 2>&1 > /dev/null) \
    && rm -rf /tmp/* \
-   && cd /opt/startup \
+   && cd /home/site/wwwroot \
    && npm install 
 
 ENV PORT 8080
@@ -42,4 +42,4 @@ ENV PATH ${PATH}:/home/site/wwwroot
 
 WORKDIR /home/site/wwwroot
 
-ENTRYPOINT ["/opt/startup/init_container.sh"]
+ENTRYPOINT ["/home/site/wwwroot/init_container.sh"]

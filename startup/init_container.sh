@@ -29,12 +29,11 @@ sed -i "s/SSH_PORT/$SSH_PORT/g" /etc/ssh/sshd_config
 #STARTUP_COMMAND_PATH="/opt/startup/"
 #ORYX_ARGS="-appPath /home/site/wwwroot -output $STARTUP_COMMAND_PATH -usePM2 -defaultApp=/opt/startup/default-static-site.js -userStartupCommand '$@'"
 
-
 file="/home/site/wwwroot/app.js"
 if [ -f "$file" ]
 then
 	echo "$file found."
-    eavl "node /home/site/wwwroot/app.js"
+    eval "node /home/site/wwwroot/app.js"
 else
 	echo "$file not found in /home/site/wwwroot."
 fi
