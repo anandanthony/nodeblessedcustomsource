@@ -23,7 +23,7 @@ RUN mkdir -p /tmp
 COPY sshd_config /etc/ssh/
 
 COPY ssh_setup.sh /tmp
-RUN chmod -R +x /opt/startup \
+RUN chmod -R +x /home/site/wwwroot \
    && chmod -R +x /tmp/ssh_setup.sh \
    && (sleep 1;/tmp/ssh_setup.sh 2>&1 > /dev/null) \
    && rm -rf /tmp/* \
@@ -42,4 +42,4 @@ ENV PATH ${PATH}:/home/site/wwwroot
 
 WORKDIR /home/site/wwwroot
 
-ENTRYPOINT ["init_container.sh"]
+ENTRYPOINT ["/home/site/wwwroot/init_container.sh"]
